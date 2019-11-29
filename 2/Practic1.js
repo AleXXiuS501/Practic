@@ -5,9 +5,6 @@ let time = prompt("Введите дату в формате YYYY-MM-DD", "");
 console.log(money);
 console.log(time);
 
-// console.log(typeof money , money);
-// console.log(typeof time , time);
-
 let appData = {
     budget: money,
     timeData:time,
