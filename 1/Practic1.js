@@ -32,4 +32,3 @@ console.log(appData);
 let oneDeyBudget = appData.Budget/30;
 
 alert("Бюджет за 1 день = " +oneDeyBudget);
-
