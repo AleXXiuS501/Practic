@@ -17,7 +17,7 @@ let appData = {
     budget: money,
     timeData:time,
     expenses: {}, 
-    optimalExpenses: {},
+    optionalExpenses: {},
     income: [],
     savings: true,
 };
@@ -44,15 +44,18 @@ function detectDayBudget() {
 }
 detectDayBudget();
 
-if(appData.PerDay < 1000) {
-    console.log("Минимальный уровень достатка");
-} else if(appData.PerDay > 1000 && appData.PerDay < 2300) {
-    console.log("Средний уровень достатка");
-} else if (appData.PerDay > 2300) {
-    console.log("Высокий уровень достатка");
-} else {
-    console.log("Произошла ошибка");
+function detectLevel() {
+    if(appData.PerDay < 1000) {
+        console.log("Минимальный уровень достатка");
+    } else if(appData.PerDay > 1000 && appData.PerDay < 2300) {
+        console.log("Средний уровень достатка");
+    } else if (appData.PerDay > 2300) {
+        console.log("Высокий уровень достатка");
+    } else {
+        console.log("Произошла ошибка");
+    }
 }
+detectLevel();
     
 function checkSevings() {
     if (appData.savings == true) {
@@ -64,3 +67,23 @@ function checkSevings() {
 }
 checkSevings();
 
+function chooseOptExpenses() {
+    let i = 0;
+    do {
+    console.log(i);
+    i++;
+    
+    let c = prompt("Введите статью необязательных расходов", "");
+    let d = prompt("Во сколько обойдется?", "");
+       
+    if ( (typeof(c))=== "string" && (typeof(c)) != null && (typeof(d)) != null 
+        && c != "" && d != "" && c.length < 50) {
+        console.log("done");        
+    appData.optionalExpenses[c] = d;
+    } else {
+        i = i - 1;
+    }
+}
+while (i < 3);
+}
+chooseOptExpenses();

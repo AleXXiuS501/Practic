@@ -12,7 +12,7 @@ let appData = {
     Budget: money,
     timeData:time,
     expenses: {}, 
-    optimalExpenses: {},
+    optionalExpenses: {},
     income: [],
     savings: false,
 };
