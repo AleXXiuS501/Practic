@@ -1,10 +1,12 @@
 'use strict';
+
+
 let money, time;
 
 function start() {
     money = +prompt("Ваш бюджет на месяц ", "");
-    time = prompt("Введите дату в формате YYYY-MM-DD", "");
     console.log(money);
+    time = prompt("Введите дату в формате YYYY-MM-DD", "");
     console.log(time);
 
     while(isNaN(money) || money == "" || money == null) {
@@ -28,8 +30,8 @@ function chooseExpenses() {
         let b = prompt("Во сколько обойдется?", "");
     
         if ( (typeof(a))=== "string" && (typeof(a)) != null && (typeof(b)) != null 
-            && a != "" && b != "" && a.length < 50) {
-            console.log("done");        
+            && a != "" && b != "" && a.length < 50) {   
+            console.log("a: " + b);    
             appData.expenses[a] = b;
         } else {
             i = i - 1;
@@ -68,22 +70,11 @@ function checkSevings() {
 checkSevings();
 
 function chooseOptExpenses() {
-    let i = 0;
-    do {
-    console.log(i);
-    i++;
-    
-    let c = prompt("Введите статью необязательных расходов", "");
-    let d = prompt("Во сколько обойдется?", "");
-       
-    if ( (typeof(c))=== "string" && (typeof(c)) != null && (typeof(d)) != null 
-        && c != "" && d != "" && c.length < 50) {
-        console.log("done");        
-    appData.optionalExpenses[c] = d;
-    } else {
-        i = i - 1;
+
+    for (let i = 1; i <= 3; i++) {
+        let questionOptExpenses = prompt("Статья необязательных расходов?");
+        appData.optionalExpenses[i] = questionOptExpenses;
+        console.log(appData.optionalExpenses);
     }
-}
-while (i < 3);
 }
 chooseOptExpenses();
