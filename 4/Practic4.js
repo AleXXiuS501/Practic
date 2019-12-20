@@ -83,7 +83,7 @@ let appData = {
             let arr = [1, 2, 3, 4];
 
         arr.forEach(function(items, i ) {
-            console.log( "Способ дополнительного зароботка: " + (i +1) + "- " + items );           
+            console.log( "Способ дополнительного зароботка: " + (i+1) + "- " + items );           
         });  
     }
 };
