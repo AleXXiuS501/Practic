@@ -13,7 +13,7 @@ let menu = document.getElementsByClassName("menu")[0],
     menuItemLi.textContent = "Пятый пункт";
     menu.appendChild(menuItemLi);
 
-    document.body.style.backgroundImage = "url('apple_true.jpg')";
+    document.body.style.backgroundImage =  "url('img/apple_true.jpg')";
     adv.remove();
 
     title.textContent = "Мы продаем только подлинную технику Apple";
