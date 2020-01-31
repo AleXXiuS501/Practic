@@ -1,3 +1,27 @@
+// function menuClickAbout() {
+//     displayElement("photo",false); 
+//     displayElement("about", true);
+//     displayElement("price",false);
+//     displayElement("contacts",false);
+// }
+
+// function menuClickPhoto(){
+//     displayElement("photo",true); 
+//     displayElement("about",false);
+//     displayElement("price",false);
+//     displayElement("contacts",false); 
+// }
+
+// function displayElement(elementID, displayBool) {
+//     var x = document.getElementById(elementID);
+//     if (displayBool) {
+//         x.style.display = "block";
+//       } else {
+//         x.style.display = "none";
+//       }
+// }
+
+
 
 window.addEventListener('DOMContentLoaded', function() {
 
@@ -35,50 +59,94 @@ window.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-});
-
-let dots = document.querySelectorAll('.dot'),
-    dotsArea = document.querySelector('.slider-dots'),
-    slides = document.querySelectorAll('.slider-item'),
-    prevBtn = document.querySelector('.prev'),
-    nextBtn = document.querySelector('.next'),
-    slideIndex = 1;
-
-showSlides(slideIndex);
-
-function showSlides (n) {
-    if (n < 1) {
-        slideIndex = slides.length;
-    }else if (n > slides.length) {
+    
+    let dots = document.querySelectorAll('.dot'),
+        dotsArea = document.querySelector('.slider-dots'),
+        slides = document.querySelectorAll('.slider-item'),
+        prevBtn = document.querySelector('.prev'),
+        nextBtn = document.querySelector('.next'),
         slideIndex = 1;
+    
+    showSlides(slideIndex);
+    
+    function showSlides (n) {
+        if (n < 1) {
+            slideIndex = slides.length;
+        }else if (n > slides.length) {
+            slideIndex = 1;
+        }
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = 'none';
+        }
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].classList.remove('active');
+        }
+        slides[slideIndex - 1].style.display = 'block';
+        dots[slideIndex -1].classList.add('active');
     }
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = 'none';
+    
+    function plusSlides (n) {
+        showSlides(slideIndex += n);
     }
-    for (let i = 0; i < dots.length; i++) {
-        dots[i].classList.remove('active');
+    function currentSlide (n) {
+        showSlides(slideIndex = n);
     }
-    slides[slideIndex - 1].style.display = 'block';
-    dots[slideIndex -1].classList.add('active');
-}
+    prevBtn.onclick = function () {
+        plusSlides(-1);
+    };
+    nextBtn.onclick = function () {
+        plusSlides(1);
+    };
+    dotsArea.onclick = function (event) {
+        for (let i = 0; i < dots.length + 1; i++) {
+            if(event.target.classList.contains('dot') &&
+            event.target == dots[i - 1]) {
+                currentSlide(i);
+            }
+        }
+    };
+    
+    let deadLine = '2020-02-21 00:17:00'; 
 
-function plusSlides (n) {
-    showSlides(slideIndex += n);
-}
-function currentSlide (n) {
-    showSlides(slideIndex = n);
-}
-prevBtn.onclick = function () {
-    plusSlides(-1);
-};
-nextBtn.onclick = function () {
-    plusSlides(1);
-};
-dotsArea.onclick = function (event) {
-    for (let i = 0; i < dots.length + 1; i++) {
-        if(event.target.classList.contains('dot') &&
-        event.target == dots[i - 1]) {
-            currentSlide(i);
+    function getTimeRemaining(endTime) {
+        let t = Date.parse(endTime) - Date.parse(new Date()),
+        seconds = Math.floor((t/1000) % 60),
+        minutes = Math.floor((t/1000/60) % 60),
+        hours = Math.floor((t/(1000*60*60))),
+        days = Math.floor((t/(1000*60*60*24)));
+    
+        return {
+            'total' : t,
+            // 'days' : days,
+            'hours' : hours,
+            'minutes' : minutes,
+            'seconds' : seconds
+        };
+    }
+
+    function setClock(id, endTime) {
+        let timer = document.getElementById(id),
+            // days = timer.querySelector('.days'),
+            hours = timer.querySelector('.hours'),
+            minutes = timer.querySelector('.minutes'),
+            seconds = timer.querySelector('.seconds'),
+            timeInterval = setInterval(updateClock, 1000);
+
+        function updateClock() {
+            let t = getTimeRemaining(endTime);
+                // days.textContent = ('0' + t.days).slice(-2);
+                hours.textContent = ('0' + t.hours).slice(-2);
+                minutes.textContent = ('0' + t.minutes).slice(-2);
+                seconds.textContent = ('0' + t.seconds).slice(-2);
+            if (t.total <=0) {
+                clearInterval(timeInterval);
+                // days.textContent = '00';
+                hours.textContent = '00';
+                minutes.textContent = '00';
+                seconds.textContent = '00';
+            }    
         }
     }
-};
+
+    setClock('timer', deadLine);
+});
