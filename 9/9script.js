@@ -47,9 +47,9 @@ window.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    info.addEventListener('click', function(event) {
+    info.addEventListener('click', event => {
         let target = event.target;
-        if(target && target.classList.contains('info-header-tab')) {
+        if(target.className == 'info-header-tab') {
             for(let i = 0; i < tab.length; i++) {
                 if (target == tab[i]) {
                     hideTabContent(0);
@@ -105,8 +105,9 @@ window.addEventListener('DOMContentLoaded', function() {
             }
         }
     };
-    
-    let deadLine = '2020-02-21 00:17:00'; 
+    // Timer
+
+    let deadLine = '2020-04-15 00:17:00'; 
 
     function getTimeRemaining(endTime) {
         let t = Date.parse(endTime) - Date.parse(new Date()),
@@ -117,7 +118,7 @@ window.addEventListener('DOMContentLoaded', function() {
     
         return {
             'total' : t,
-            // 'days' : days,
+            'days' : days,
             'hours' : hours,
             'minutes' : minutes,
             'seconds' : seconds
@@ -126,7 +127,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     function setClock(id, endTime) {
         let timer = document.getElementById(id),
-            // days = timer.querySelector('.days'),
+            days = timer.querySelector('.days'),
             hours = timer.querySelector('.hours'),
             minutes = timer.querySelector('.minutes'),
             seconds = timer.querySelector('.seconds'),
@@ -134,13 +135,13 @@ window.addEventListener('DOMContentLoaded', function() {
 
         function updateClock() {
             let t = getTimeRemaining(endTime);
-                // days.textContent = ('0' + t.days).slice(-2);
+                days.textContent = ('0' + t.days).slice(-2);
                 hours.textContent = ('0' + t.hours).slice(-2);
                 minutes.textContent = ('0' + t.minutes).slice(-2);
                 seconds.textContent = ('0' + t.seconds).slice(-2);
             if (t.total <=0) {
                 clearInterval(timeInterval);
-                // days.textContent = '00';
+                days.textContent = '00';
                 hours.textContent = '00';
                 minutes.textContent = '00';
                 seconds.textContent = '00';
@@ -170,7 +171,6 @@ window.addEventListener('DOMContentLoaded', function() {
 //выбираем все кнопки 
     let more = document.querySelector('.more'),
         overlay = document.querySelector('.overlay');
-        // close = document.querySelector('.popup-close');
 
     moreTab.forEach(function(item){
         item.addEventListener('click', function() {
