@@ -240,5 +240,5 @@ window.addEventListener('DOMContentLoaded', function() {
    
         form.addEventListener('submit', requestForm);
         formContact.addEventListener('submit', requestForm);
-
+        
 });
